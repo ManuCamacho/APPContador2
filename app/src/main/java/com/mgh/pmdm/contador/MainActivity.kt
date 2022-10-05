@@ -26,12 +26,18 @@ class MainActivity : AppCompatActivity() {
 
         // Referencia al botón
         val btAdd=findViewById<Button>(R.id.btAdd)
+        val btResta=findViewById<Button>(R.id.btResta)
+
 
         // Asociaciamos una expresióin lambda como
         // respuesta (callback) al evento Clic sobre
         // el botón
         btAdd.setOnClickListener {
             contador++
+            textViewContador.setText(contador.toString())
+        }
+        btResta.setOnClickListener {
+            contador--
             textViewContador.setText(contador.toString())
         }
 
@@ -66,24 +72,19 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "En el metodo onDestroy")
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
+    override fun onSaveInstanceState(estadoAGuardar: Bundle) {
         super.onSaveInstanceState(estadoAGuardar)
             Log.d(TAG,"onSaveInstanceState. Guardo contador con valor"+contador.toString())
                     estadoAGuardar.putInt("Contador", contador)
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+    override fun onRestoreInstanceState(estadoARestaurar: Bundle) {
         super.onRestoreInstanceState(estadoARestaurar)
-        contador=estadoARestaurar.getInt("Contador")
-        Log.d(TAG, "onRestoreInstanceState. Restauroal contador el valor " +contador.toString())
-    }
-        val
-    textViewContador:TextView=findViewById(R.id.textViewContador)
+        contador = estadoARestaurar.getInt("Contador")
+        Log.d(TAG, "onRestoreInstanceState. Restauroal contador el valor " + contador.toString())
+
+        val textViewContador: TextView = findViewById(R.id.textViewContador)
         textViewContador.setText(contador.toString())
 
-
-
-
-
-
+    }
 }
